@@ -60,3 +60,5 @@ $json | ConvertFrom-Json | Where-Object { $_.rule.security_severity_level -eq "h
 
 
 $json | ConvertFrom-Json | Where-Object {($_.state -eq "open") -and ($_.rule.security_severity_level -eq "high")} | Select-Object rule, most_recent_instance
+
+$json | ConvertFrom-Json | Where-Object { $_.state -eq "open" -and $_.rule.security_severity_level -eq "high" }
