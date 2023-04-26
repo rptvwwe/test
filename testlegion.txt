@@ -54,3 +54,6 @@ $alerts = ConvertFrom-Json $json
 $filteredAlerts = $alerts | Where-Object { $_.rule.severity -eq "high" -and $_.most_recent_instance.state -eq "open" }
 
 $filteredAlerts
+
+
+$json | ConvertFrom-Json | Where-Object { $_.rule.security_severity_level -eq "high" -and $_.state -eq "open" } | ConvertTo-Json
