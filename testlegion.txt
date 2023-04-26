@@ -65,3 +65,5 @@ $json | ConvertFrom-Json | Where-Object { $_.state -eq "open" -and $_.rule.secur
 
 $json | ConvertFrom-Json | Where-Object { $_.state -eq 'open' -and $_.rule.security_severity_level -eq 'high' } | ConvertTo-Json
 
+$fileContent = Get-Content -Path "C:\path\to\file.txt" -Raw
+$jsonContent = $fileContent | ConvertTo-Json
