@@ -1,0 +1,56 @@
+$json = @"
+[
+   {
+        "number": 1,
+        "created_at": "2023-04-20T09:27:47Z",
+        "updated_at": "2023-04-22T11:36:57Z",
+        "url": "https://api.github.com/repos/rptvwwe/onlineshop/code-scanning/alerts/1",
+        "html_url": "https://github.com/rptvwwe/onlineshop/security/code-scanning/1",
+        "state": "open",
+        "fixed_at": null,
+        "dismissed_by": null,
+        "dismissed_at": null,
+        "dismissed_reason": null,
+        "dismissed_comment": null,
+        "rule": {
+          "id": "js/redos",
+          "severity": "error",
+          "description": "Inefficient regular expression",
+          "name": "js/redos",
+          "tags": ["external/cwe/cwe-1333","external/cwe/cwe-400","external/cwe/cwe-730","security"],
+          "security_severity_level": "high"
+        },
+        "tool": {
+          "name": "CodeQL",
+          "guid": null,
+          "version": "2.13.0"
+        },
+        "most_recent_instance": {
+          "ref": "refs/heads/master",
+          "analysis_key": ".github/workflows/codeql.yml:analyze",
+          "environment": "{\"language\":\"javascript\"}",
+          "category": "/language:javascript",
+          "state": "open",
+          "commit_sha": "beb087031202ed1382e8d1fcec59458865ab578c",
+          "message": {
+            "text": "This part of the regular expression may cause exponential backtracking on strings starting with 'ftp://' and containing many repetitions of '0.0.'."
+          },
+          "location": {
+            "path": "OnlineStore/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+            "start_line": 1092,
+            "end_line": 1092,
+            "start_column": 310,
+            "end_column": 538
+          },
+          "classifications": []
+        },
+        "instances_url": "https://api.github.com/repos/rptvwwe/onlineshop/code-scanning/alerts/1/instances"
+      }
+]
+"@
+
+$alerts = ConvertFrom-Json $json
+
+$filteredAlerts = $alerts | Where-Object { $_.rule.severity -eq "high" -and $_.most_recent_instance.state -eq "open" }
+
+$filteredAlerts
