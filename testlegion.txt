@@ -69,3 +69,5 @@ $fileContent = Get-Content -Path "C:\path\to\file.txt" -Raw
 $jsonContent = $fileContent | ConvertTo-Json
 
 $data | Where-Object { $_.state -eq 'open' } | ForEach-Object { $_ | Select-Object -Property number, rule, tool, most_recent_instance | Where-Object { $_.rule.security_severity_level -eq 'high' } }
+
+| ConvertFrom-Json | where { $_.rule.security_severity_level -eq 'medium' -and $_.state -eq 'open' } | select -Property rule, state, most_recent_instance
