@@ -80,3 +80,11 @@ $data = ConvertFrom-Json $json
 
 $results = $data.value | Where-Object { $_.rule.security_severity_level -eq "high" -and $_.state -eq "open" }
 
+$count = 0
+foreach ($alert in $data.value) {
+    if ($alert.rule.security_severity_level -eq "high" -and $alert.state -eq "open") {
+        Write-Output $alert
+        $count++
+    }
+}
+
