@@ -76,3 +76,7 @@ $data | Where-Object { $_.state -eq 'open' } | ForEach-Object { $_ | Select-Obje
 $data = Get-Content -Path alert.json -Raw | ConvertFrom-Json
 $data | Where-Object { $_.rule.security_severity_level -eq 'high' -and $_.state -eq 'open' } | Select-Object -Property rule,name,state
 
+$data = ConvertFrom-Json $json
+
+$results = $data.value | Where-Object { $_.rule.security_severity_level -eq "high" -and $_.state -eq "open" }
+
